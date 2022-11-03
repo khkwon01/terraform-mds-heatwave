@@ -66,7 +66,7 @@ resource "null_resource" "write_kubeconfig_on_operator" {
     user        = "opc"
   }
 
-  depends_on = [oci_containerengine_cluster.oke-cluster, null_resource.install_kubectl_operator, oci_identity_policy.operator_instance_principal]
+  // depends_on = [oci_containerengine_cluster.oke-cluster, null_resource.install_kubectl_operator, oci_identity_policy.operator_instance_principal]
 
   provisioner "file" {
     content     = data.template_file.generate_kubeconfig.rendered
