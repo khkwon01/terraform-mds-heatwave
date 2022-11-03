@@ -1,6 +1,6 @@
 #identity
 variable compartment_ocid { }
-variable tenancy_ocid { default = "ocid1.user.oc1..aaaaaaaav6pq6k2lx6uawup5bsojthoirjb3fghvlni5bmwfc7qzdxhhcyja" }
+variable tenancy_ocid { default = "ocid1.tenancy.oc1..aaaaaaaa4yet6xypq5khquqhozb7rja2cwomj4zvpxvqgusrnojr3t5rieiq" }
 variable region { default = "ap-chuncheon-1" }
 
 #network
