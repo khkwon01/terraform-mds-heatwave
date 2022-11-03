@@ -59,6 +59,7 @@ resource "oci_core_instance" "operator" {
 
 }
 
+/* This block was commented due to authorization problem
 resource "oci_identity_dynamic_group" "operator_instance_principal" {
 
   provider       = oci.home
@@ -79,3 +80,5 @@ resource "oci_identity_policy" "operator_instance_principal" {
   statements     = ["Allow dynamic-group ${oci_identity_dynamic_group.operator_instance_principal.name} to manage all-resources in compartment id ${var.compartment_ocid}"]
 
 }
+
+*/
