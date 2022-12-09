@@ -35,7 +35,7 @@ resource "oci_core_instance" "operator" {
 
   availability_domain = data.oci_identity_availability_domain.AD-1.name
   compartment_id      = var.compartment_ocid
-  display_name        = "oke-operator"
+  display_name        = "mds-operator"
   shape               = var.operator_shape
 
   shape_config {
@@ -59,26 +59,4 @@ resource "oci_core_instance" "operator" {
 
 }
 
-/* This block was commented due to authorization problem
-resource "oci_identity_dynamic_group" "operator_instance_principal" {
 
-  provider       = oci.home
-  compartment_id = var.tenancy_ocid
-  description    = "dynamic group to allow instances to call services for 1 operator"
-
-  matching_rule = "ALL {instance.id = '${oci_core_instance.operator.id}'}"
-  name          = "operator-instance-principal-${substr(uuid(), 0, 8)}"
-
-}
-
-resource "oci_identity_policy" "operator_instance_principal" {
-
-  provider       = oci.home
-  compartment_id = var.compartment_ocid
-  description    = "policy to allow operator host to call services"
-  name           = "operator-instance-principal"
-  statements     = ["Allow dynamic-group ${oci_identity_dynamic_group.operator_instance_principal.name} to manage all-resources in compartment id ${var.compartment_ocid}"]
-
-}
-
-*/
