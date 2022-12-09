@@ -1,7 +1,7 @@
-title: "OKE & MDS & Operatior VM"
-dscription: "OKE & MDS & Operatior VM"
+title: "MDS & Operatior VM"
+dscription: "MDS & Operatior VM"
 schemaVersion: 1.6.0
-version: "20211220"
+version: "20221209"
 locale: "en"
 
 
@@ -27,17 +27,8 @@ variableGroups:
       - mysql_data_storage_in_gb
       - deploy_mds_ha
 
-  - title: Kubernetes Cluster Configuration
-    visible: true
-    variables:
-      - kube_cluster_name
-      - kube_version
-      - node_shape
-      - node_shape_ocpus
-      - node_shape_memory
-      - node_pool_ssh_public_key
 
-  - title: "OKE Operator Configuration"
+  - title: "Operator VM Configuration"
     visible: true
     variables:
       - operator_shape
@@ -76,27 +67,3 @@ variables:
     required: true
     title: "Shape for the MDS Instance"
 
-  kube_cluster_name:
-    type: string
-    required: true
-    title: Kubernetes Cluster's name
-
-  kube_version:
-    type: string
-    required: true
-    title: Kubernetes Version
-
-  node_shape:
-    type: string
-    required: true
-    title: Shape of Worker Node
-
-  node_shape_ocpus:
-    type: string
-    required: true
-    title: OCPU per Worker Node
-
-  node_shape_memory:
-    type: string
-    required: true
-    title: Memory per Worker Node
