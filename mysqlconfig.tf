@@ -17,8 +17,6 @@ resource null_resource "install_mysqlsh" {
 
   }
 
-  depends_on = [null_resource.install_kubectl_operator]
-
   provisioner "file" {
     content     = data.template_file.install_mysqlsh.rendered
     destination = "~/install_mysqlsh.sh"
