@@ -1,7 +1,10 @@
 #identity  => you should modify this value according to your test environment
 variable compartment_ocid { }
-variable tenancy_ocid { default = "ocid1.tenancy.oc1..aaaaaaaa4yet6xypq5khquqhozb7rja2cwomj4zvpxvqgusrnojr3t5rieiq" }
-variable region { default = "ap-chuncheon-1" }
+variable tenancy_ocid { }
+variable region { }
+
+#variable tenancy_ocid { default = "ocid1.tenancy.oc1..aaaaaaaa4yet6xypq5khquqhozb7rja2cwomj4zvpxvqgusrnojr3t5rieiq" }
+#variable region { default = "ap-chuncheon-1" }
 
 #network
 
