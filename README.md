@@ -21,3 +21,18 @@ Provision MySQL Database Service (MDS) and Heatwave with Terraform.
   [opc@wordpressserver1 plugins]$ sudo cp ludicrousdb/ludicrousdb/drop-ins/db.php ../db.php
   [opc@wordpressserver1 plugins]$ sudo cp ludicrousdb/ludicrousdb/drop-ins/db-config.php ../../
 ```
+3. Modify the information of db config like the following example.
+```
+  [opc@wordpressserver1 ~]$ cd /var/www/html/
+  [opc@wordpressserver1 html]$ sudo vim db-config.php
+  
+  $wpdb->add_database( array(
+  'host'     => "10.0.1.152", <-- edit     // If port is other than 3306, use host:port.
+  'user'     => DB_USER,
+  'password' => DB_PASSWORD,
+  'name'     => DB_NAME,
+  'write'    => 0,
+  'read'     => 1,
+  'dataset'  => 'global',
+  'timeout'  => 0.2,
+   ) );
