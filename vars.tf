@@ -21,7 +21,7 @@ variable operator_os_version { default = "8" }
 # MySQL Data Service
 variable "mds_instance_name" {
   description = "Name of the MDS instance"
-  default     = "MySQLInstance"
+  default     = "MDS-HW"
 }
 
 variable "mysql_db_system_admin_username" {
