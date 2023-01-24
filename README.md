@@ -13,3 +13,6 @@ If you execute the above terraform code in oci, it make the below service like d
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
 - ML : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3306&p210_wec=&session=374748331881
 
+# When the function of ML_PREDICT_ROW, ML_EXPLAIN_ROW have some errors, use the below function arguement..
+- SELECT sys.ML_PREDICT_ROW(@row_input, @iris_model, JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+- SELECT sys.ML_EXPLAIN_ROW(@row_input, @iris_model, JSON_OBJECT('prediction_explainer', 'permutation_importance'));
