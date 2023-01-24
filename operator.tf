@@ -35,7 +35,7 @@ resource "oci_core_instance" "operator" {
 
   availability_domain = data.oci_identity_availability_domain.AD-1.name
   compartment_id      = var.compartment_ocid
-  display_name        = "mds-operator"
+  display_name        = var.operator_name
   shape               = var.operator_shape
 
   shape_config {
