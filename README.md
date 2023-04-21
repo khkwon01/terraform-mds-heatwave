@@ -27,3 +27,10 @@ If you execute the above terraform code in oci, it make the below service like d
       CREATE TABLE census_train ( age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255));
       CREATE TABLE census_test LIKE census_train;
       ``` 
+    - 데이터 import
+      ```
+      mysqlsh admin@<your ip> --mc    # class mode
+      \js
+      util.importTable("census_train.csv",{table: "census_train", dialect: "csv-unix", skipRows:1})
+      util.importTable("census_test.csv",{table: "census_test", dialect: "csv-unix", skipRows:1})
+      ```
