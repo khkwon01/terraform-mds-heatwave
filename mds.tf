@@ -10,3 +10,12 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     is_highly_available = var.deploy_mds_ha
     mysql_version = var.mysql_db_version
 }
+
+resource "oci_mysql_mysql_configuration" "MDSinstance_configuration" {
+    compartment_id = var.compartment_ocid    
+    shape_name = var.mysql_shape_name
+    display_name = var.mysql_db_configuration
+    variables {
+        sql_generate_invisible_primary_key = "ON"
+    }
+}
