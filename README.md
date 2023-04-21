@@ -45,4 +45,5 @@ If you execute the above terraform code in oci, it make the below service like d
       CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
       -- Select score
       select @score;
+      SELECT model_explanation FROM ML_SCHEMA_admin.MODEL_CATALOG WHERE model_handle=@census_model;
       ```
