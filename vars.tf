@@ -50,3 +50,7 @@ variable "deploy_mds_ha" {
   type        = bool
   default     = false
 }
+
+variable "mysql_db_version" {
+  default = "8.0.32"
+}
