@@ -16,6 +16,6 @@ resource "oci_mysql_mysql_configuration" "MDSinstance_configuration" {
     shape_name = var.mysql_shape_name
     display_name = var.mysql_db_configuration
     variables {
-        sql_require_primary_key = true
+        sql_require_primary_key = false
     }
 }
