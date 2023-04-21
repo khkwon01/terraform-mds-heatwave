@@ -20,9 +20,9 @@ If you execute the above terraform code in oci, it make the below service like d
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test --output-document=census_test.csv
     - DB 작업
       ```
-      DROP DATABASE IF EXISTS heatwaveml_bench;
-      CREATE DATABASE heatwaveml_bench;
-      USE heatwaveml_bench;
+      DROP DATABASE IF EXISTS census;
+      CREATE DATABASE census;
+      USE census;
 
       CREATE TABLE census_train ( age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255));
       CREATE TABLE census_test LIKE census_train;
