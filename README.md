@@ -39,24 +39,34 @@ If you execute the above terraform code in oci, it make the below service like d
       \sql
       -- Train the model
       CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification'), @census_model);
+      
       -- Load the model into HeatWave
       CALL sys.ML_MODEL_LOAD(@census_model, NULL);
+      
       -- Score the model on the test data
       CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
+      
       -- Select score
       select @score;
+      
       -- See the detail of model
       SELECT model_explanation FROM ML_SCHEMA_admin.MODEL_CATALOG WHERE model_handle=@census_model;
+      
       -- Specify 1 row example
       set @row_input = '{"index": 1,"age": 38,"workclass": "Private","fnlwgt": 89814,"education": "HS-grad","education-num": 9,"marital-status": "Married-civ-spouse","occupation": "Farming-fishing","relationship": "Husband","race": "White","sex": "Male","capital-gain": 0,"capital-loss": 0,"hours-per-week": 50,"native-country": "United-States"}' ;
+      
       -- predict for 1 row
       SELECT sys.ML_PREDICT_ROW(@row_input, @census_model, NULL);
+      
       -- explain for 1 row
       SELECT sys.ML_EXPLAIN_ROW(@row_input, @census_model, JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+      
       -- predict for whole test table
       CALL sys.ML_PREDICT_TABLE('census.census_test', @census_model, 'census.census_test_predictions', NULL);
+      
       -- explain for whole test table
       CALL sys.ML_EXPLAIN_TABLE('census.census_test', @census_model, 'census.census_test_predictions', JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+      
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
       ```
