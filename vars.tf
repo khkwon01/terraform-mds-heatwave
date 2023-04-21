@@ -55,5 +55,5 @@ variable "mysql_db_version" {
 }
 
 variable "mysql_db_configuration" {
-  default = "MySQL.HeatWave.VM.Standard.Standalone_New"  
+  default = "MySQL.HeatWave.VM.Standard.Standalone_New1"  
 }
