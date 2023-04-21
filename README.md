@@ -34,3 +34,15 @@ If you execute the above terraform code in oci, it make the below service like d
       util.importTable("census_train.csv",{table: "census_train", dialect: "csv-unix", skipRows:1})
       util.importTable("census_test.csv",{table: "census_test", dialect: "csv-unix", skipRows:1})
       ```
+    - ML 
+      ```
+      \sql
+      -- Train the model
+      CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification'), @census_model);
+      -- Load the model into HeatWave
+      CALL sys.ML_MODEL_LOAD(@census_model, NULL);
+      -- Score the model on the test data
+      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
+      -- Select score
+      select @score;
+      ```
