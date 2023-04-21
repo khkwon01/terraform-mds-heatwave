@@ -46,4 +46,6 @@ If you execute the above terraform code in oci, it make the below service like d
       -- Select score
       select @score;
       SELECT model_explanation FROM ML_SCHEMA_admin.MODEL_CATALOG WHERE model_handle=@census_model;
+      -- Predit for 1 row
+      SELECT sys.ML_EXPLAIN_ROW('{"index": 1,"age": 38,"workclass": "Private","fnlwgt": 89814,"education": "HS-grad","education-num": 9,"marital-status": "Married-civ-spouse","occupation": "Farming-fishing","relationship": "Husband","race": "White","sex": "Male","capital-gain": 0,"capital-loss": 0,"hours-per-week": 50,"native-country": "United-States"}', @census_model, JSON_OBJECT('prediction_explainer', 'permutation_importance'));
       ```
