@@ -37,8 +37,8 @@ variable "mysql_db_system_admin_password" {
 }
 
 variable "mysql_shape_name" {
-#    default = "MySQL.HeatWave.VM.Standard.E3"
-  default = "MySQL.HeatWave.VM.Standard.Standalone_New"
+  default = "MySQL.HeatWave.VM.Standard.Standalone"
+#  default = "MySQL.HeatWave.VM.Standard.Standalone_New"
 }
 
 variable "mysql_data_storage_in_gb" {
