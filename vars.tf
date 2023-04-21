@@ -51,7 +51,7 @@ variable "deploy_mds_ha" {
 }
 
 variable "mysql_db_version" {
-  default = "8.0.32"
+  default = "8.0.31"
 }
 
 variable "mysql_db_configuration" {
