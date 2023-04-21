@@ -8,4 +8,5 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     data_storage_size_in_gb = var.mysql_data_storage_in_gb
     display_name = var.mds_instance_name
     is_highly_available = var.deploy_mds_ha
+    mysql_version = var.mysql_db_version
 }
