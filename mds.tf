@@ -1,3 +1,12 @@
+resource "oci_mysql_mysql_configuration" "MDSinstance_configuration" {
+    compartment_id = var.compartment_ocid    
+    shape_name = var.mysql_shape_name
+    display_name = var.mysql_db_configuration
+    variables {
+        sql_require_primary_key = false
+    }
+}
+
 resource "oci_mysql_mysql_db_system" "MDSinstance" {
     admin_password = var.mysql_db_system_admin_password
     admin_username = var.mysql_db_system_admin_username
@@ -9,13 +18,6 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     display_name = var.mds_instance_name
     is_highly_available = var.deploy_mds_ha
     mysql_version = var.mysql_db_version
+    configuration_id = oci_mysql_mysql_configuration.MDSinstance_configuration.id
 }
 
-resource "oci_mysql_mysql_configuration" "MDSinstance_configuration" {
-    compartment_id = var.compartment_ocid    
-    shape_name = var.mysql_shape_name
-    display_name = var.mysql_db_configuration
-    variables {
-        sql_require_primary_key = false
-    }
-}
