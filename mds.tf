@@ -20,9 +20,6 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     is_highly_available = var.deploy_mds_ha
     mysql_version = var.mysql_db_version
     configuration_id = oci_mysql_mysql_configuration.MDSinstance_configuration.id
-    hostname_label = var.mds_instance_name
-    endpoints {
-        hostname = var.mds_instance_name
-    }
+    hostname = var.mds_instance_name
 }
 
