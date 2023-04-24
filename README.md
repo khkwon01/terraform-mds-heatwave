@@ -39,6 +39,9 @@ If you execute the above terraform code in oci, it make the below service like d
     - ML 
       ```
       \sql
+      -- Set globa variables
+      set @census_model = NULL;
+      
       -- Train the model
       CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification'), @census_model);
       
