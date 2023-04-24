@@ -1,4 +1,5 @@
-# mysqlsh
+# apache and php
+
 data "template_file" "install_webphp" {
   template = file("${path.module}/scripts/install_web_php_template.sh")
 
