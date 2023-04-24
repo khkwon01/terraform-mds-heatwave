@@ -49,8 +49,10 @@ If you execute the above terraform code in oci, it make the below service like d
       CALL sys.ML_MODEL_LOAD(@census_model, NULL);
       
       -- Score the model on the test data
-      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
-      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, NULL);
+      -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
+      -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, NULL);
+      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'accuracy', @score, NULL);
+      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold','topk'));
       
       -- Select score
       select @score;
@@ -65,7 +67,7 @@ If you execute the above terraform code in oci, it make the below service like d
       SELECT sys.ML_PREDICT_ROW(@row_input, @census_model, NULL);
       
       -- explain for 1 row
-      SELECT sys.ML_EXPLAIN_ROW(@row_input, @census_model, JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+      SELECT JSON_Pretty(sys.ML_EXPLAIN_ROW(@row_input, @census_model, JSON_OBJECT('prediction_explainer', 'permutation_importance')));
       
       -- predict for whole test table
       CALL sys.ML_PREDICT_TABLE('census.census_test', @census_model, 'census.census_test_predictions', NULL);
