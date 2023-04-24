@@ -7,7 +7,7 @@ data "template_file" "install_webphp" {
   }
 }
 
-resource null_resource "install_mysqlsh" {
+resource null_resource "install_webphp" {
   connection {
     host        = oci_core_instance.operator.public_ip
     private_key = file(var.operator_ssh_private_key_path)
