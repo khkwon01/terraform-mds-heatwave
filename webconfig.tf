@@ -1,6 +1,6 @@
 # mysqlsh
 data "template_file" "install_webphp" {
-  template = file("${path.module}/scripts/install_mysqlsh.template.sh")
+  template = file("${path.module}/scripts/install_web_php_template.sh")
 
   vars = {
     user = "opc"
@@ -18,15 +18,15 @@ resource null_resource "install_mysqlsh" {
   }
 
   provisioner "file" {
-    content     = data.template_file.install_mysqlsh.rendered
-    destination = "~/install_mysqlsh.sh"
+    content     = data.template_file.install_webphp.rendered
+    destination = "~/install_web_php_template.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x $HOME/install_mysqlsh.sh",
-      "bash $HOME/install_mysqlsh.sh",
-      "rm -f $HOME/install_mysqlsh.sh"
+      "chmod +x $HOME/install_web_php_template.sh",
+      "bash $HOME/install_web_php_template.sh",
+      "rm -f $HOME/install_web_php_template.sh"
     ]
   }
 }
