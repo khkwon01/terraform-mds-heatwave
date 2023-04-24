@@ -18,7 +18,7 @@ sudo echo "
 <?php
 phpinfo();
 ?>
-" > /var/www/html/info.php
+" | sudo tee -a /var/www/html/info.php
 
 sudo echo "
 <?php
@@ -36,7 +36,7 @@ die("ERROR: Could not connect. " . mysqli_connect_error());
 // Print database connection result
 echo 'Successfull Connect.';
 ?>
-" > /var/www/html/config.php
+" | sudo tee -a /var/www/html/config.php
 
 
 echo "The apache and php successfully installed !"
