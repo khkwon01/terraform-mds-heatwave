@@ -47,6 +47,7 @@ If you execute the above terraform code in oci, it make the below service like d
       
       -- Score the model on the test data
       CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
+      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, NULL);
       
       -- Select score
       select @score;
