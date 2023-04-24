@@ -7,7 +7,7 @@ sudo mkdir ~${user}/.mysqlsh
 sudo echo '{
     "history.autoSave": "true",
     "history.maxSize": "5000"
-}' > ~${user}/.mysqlsh/options.json
+}' | sudo tee -a ~${user}/.mysqlsh/options.json
 sudo chown -R ${user} ~${user}/.mysqlsh
 
 echo "MySQL Shell successfully installed !"
