@@ -12,4 +12,12 @@ sudo dnf module install php:7.4 -y
 sudo yum install php-cli php-mysqlnd php-zip php-gd php-mbstring php-xml php-json -y
 sudo systemctl restart httpd
 
-echo "MySQL Shell successfully installed !"
+sudo echo '{
+<?php
+phpinfo();
+?>
+}' > /var/www/html/info.php
+
+sudo setsebool -P httpd_can_network_connect 1
+
+echo "The apache and php successfully installed !"
