@@ -22,6 +22,7 @@ If you execute the above terraform code in oci, it make the below service like d
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test --output-document=census_test.csv
     - DB 작업
       ```
+      mysqlsh --uri admin@<your ip> --mc    # class mode
       DROP DATABASE IF EXISTS census;
       CREATE DATABASE census;
       USE census;
@@ -31,7 +32,6 @@ If you execute the above terraform code in oci, it make the below service like d
       ``` 
     - 데이터 import
       ```
-      mysqlsh admin@<your ip> --mc    # class mode
       \js
       util.importTable("census_train.csv",{table: "census_train", dialect: "csv-unix", skipRows:1})
       util.importTable("census_test.csv",{table: "census_test", dialect: "csv-unix", skipRows:1})
