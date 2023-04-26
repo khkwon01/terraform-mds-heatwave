@@ -61,7 +61,7 @@ If you execute the above terraform code in oci, it make the below service like d
       SELECT JSON_Pretty(model_explanation) FROM ML_SCHEMA_admin.MODEL_CATALOG WHERE model_handle=@census_model;
       
       -- Specify 1 row example
-      set @row_input = '{"index": 1,"age": 38,"workclass": "Private","fnlwgt": 89814,"education": "HS-grad","education-num": 9,"marital-status": "Married-civ-spouse","occupation": "Farming-fishing","relationship": "Husband","race": "White","sex": "Male","capital-gain": 0,"capital-loss": 0,"hours-per-week": 50,"native-country": "United-States"}' ;
+      set @row_input = '{"age": 38,"workclass": "Private","fnlwgt": 89814,"education": "HS-grad","education-num": 9,"marital-status": "Married-civ-spouse","occupation": "Farming-fishing","relationship": "Husband","race": "White","sex": "Male","capital-gain": 0,"capital-loss": 0,"hours-per-week": 50,"native-country": "United-States"}' ;
       
       -- predict for 1 row
       SELECT json_pretty(sys.ML_PREDICT_ROW(@row_input, @census_model, NULL));
