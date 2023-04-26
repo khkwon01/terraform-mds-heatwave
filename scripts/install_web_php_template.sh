@@ -20,23 +20,8 @@ phpinfo();
 ?>
 " | sudo tee -a /var/www/html/info.php
 
-sudo echo "
-<?php
-// Database credentials
-define('DB_SERVER', '10.0.20.128');// MDS server IP address
-define('DB_USERNAME', 'admin');
-define('DB_PASSWORD', 'Welcome#1');
-define('DB_NAME', 'census');
-//Attempt to connect to MySQL database
-\$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-// Check connection
-if(\$link === false){
-die('ERROR: Could not connect. ' . mysqli_connect_error());
-}
-// Print database connection result
-echo 'Successfull Connect.';
-?>
-" | sudo tee -a /var/www/html/config.php
+sudo wget https://github.com/khkwon01/terraform-mds-heatwave/raw/main/php/census.tar
+sudo tar -xvf census.tar -C /var/www/html
 
 
 echo "The apache and php successfully installed !"
