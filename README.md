@@ -58,7 +58,7 @@ If you execute the above terraform code in oci, it make the below service like d
       -- Train the model
       CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification'), @census_model);
       
-      // PK 있을 경우
+      // PK 제외하고 싶을 경우
       CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification', 'exclude_column_list', JSON_ARRAY('id')), @census_model);
       
       -- Load the model into HeatWave
