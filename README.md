@@ -52,7 +52,7 @@ If you execute the above terraform code in oci, it make the below service like d
       -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
       -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, NULL);
       CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'accuracy', @score, NULL);
-      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold','topk'));
+      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold',0));
       
       -- Select score
       select @score;
