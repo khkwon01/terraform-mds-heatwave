@@ -47,7 +47,7 @@ If you execute the above terraform code in oci, it make the below service like d
       util.importTable("census_test.csv",{table: "census_test_tmp", dialect: "csv-unix", skipRows:1})
       
       insert into census_train values (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_train_tmp;
-      insert into census_test_tmp (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_test_tmp;
+      insert into census_test (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_test_tmp;
       ```
     - ML 
       ```
@@ -67,8 +67,8 @@ If you execute the above terraform code in oci, it make the below service like d
       -- Score the model on the test data
       -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
       -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, NULL);
-      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'accuracy', @score, NULL);
-      CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold',0));
+      CALL sys.ML_SCORE('census.census_train', 'revenue', @census_model, 'accuracy', @score, NULL);
+      CALL sys.ML_SCORE('census.census_train', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold',0));
       
       -- Select score
       select @score;
