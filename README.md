@@ -28,18 +28,26 @@ If you execute the above terraform code in oci, it make the below service like d
       USE census;
 
       // 원본 SQL
-      CREATE TABLE census_train ( age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255));
-      CREATE TABLE census_test LIKE census_train;
+      CREATE TABLE census_train_tmp ( age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255));
+      CREATE TABLE census_test_tmp LIKE census_train_tmp;
       
       // 변경 SQL (PK 포함)
-      CREATE TABLE census_train (id INT primary key auto_increment age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255)); 
-      CREATE TABLE census_test (id INT primary key auto_increment age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255)); 
+      CREATE TABLE census_train (id INT primary key auto_increment, age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255)); 
+      CREATE TABLE census_test (id INT primary key auto_increment, age INT, workclass VARCHAR(255), fnlwgt INT, education VARCHAR(255), `education-num` INT, `marital-status` VARCHAR(255), occupation VARCHAR(255), relationship VARCHAR(255), race VARCHAR(255), sex VARCHAR(255), `capital-gain` INT, `capital-loss` INT, `hours-per-week` INT, `native-country` VARCHAR(255), revenue VARCHAR(255)); 
       ``` 
     - 데이터 import
       ```
       \js
+      // 원본 SQL
       util.importTable("census_train.csv",{table: "census_train", dialect: "csv-unix", skipRows:1})
-      util.importTable("census_test.csv",{table: "census_test", dialect: "csv-unix", skipRows:1})
+      util.importTable("census_test.csv",{table: "census_test", dialect: "csv-unix", skipRows:1})      
+      
+      // 변경 SQL (PK포함)
+      util.importTable("census_train.csv",{table: "census_train_tmp", dialect: "csv-unix", skipRows:1})
+      util.importTable("census_test.csv",{table: "census_test_tmp", dialect: "csv-unix", skipRows:1})
+      
+      insert into census_train values (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_train_tmp;
+      insert into census_test_tmp (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_test_tmp;
       ```
     - ML 
       ```
@@ -49,6 +57,9 @@ If you execute the above terraform code in oci, it make the below service like d
       
       -- Train the model
       CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification'), @census_model);
+      
+      // PK 있을 경우
+      CALL sys.ML_TRAIN('census.census_train', 'revenue', JSON_OBJECT('task', 'classification', 'exclude_column_list', JSON_ARRAY('id')), @census_model);
       
       -- Load the model into HeatWave
       CALL sys.ML_MODEL_LOAD(@census_model, NULL);
