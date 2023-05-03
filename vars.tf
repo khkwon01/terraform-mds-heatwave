@@ -60,7 +60,7 @@ variable "mysql_db_configuration" {
 
 variable "mysql_heatwave_enabled" {
   description = "Defines whether a MySQL HeatWave cluster is enabled"
-  default     = true
+  default     = false
 }
 
 variable "mysql_heatwave_cluster_size" {
