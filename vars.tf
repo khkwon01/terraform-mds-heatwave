@@ -51,9 +51,24 @@ variable "deploy_mds_ha" {
 }
 
 variable "mysql_db_version" {
-  default = "8.0.31"
+  default = "8.0.33"
 }
 
 variable "mysql_db_configuration" {
   default = "MySQL.HeatWave.VM.Standard.Standalone_New1"  
+}
+
+variable "mysql_heatwave_enabled" {
+  description = "Defines whether a MySQL HeatWave cluster is enabled"
+  default     = true
+}
+
+variable "mysql_heatwave_cluster_size" {
+  description = "Number of MySQL HeatWave nodes to be created"
+  default     = 1
+}
+
+variable "mysql_heatwave_shape" {
+  description = "The shape to be used instead of mysql_shape_name when mysql_heatwave_enabled = true."
+  default     = "MySQL.HeatWave.VM.Standard.E3"
 }
