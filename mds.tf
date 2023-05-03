@@ -23,3 +23,9 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     hostname_label = var.mds_instance_name
 }
 
+resource "oci_mysql_heat_wave_cluster" "HeatWave" {
+    count        = var.mysql_heatwave_enabled ? 1 : 0
+    db_system_id = oci_mysql_mysql_db_system.MDSinstance.id
+    cluster_size = var.mysql_heatwave_cluster_size
+    shape_name   = var.mysql_heatwave_shape
+}
