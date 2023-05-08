@@ -9,7 +9,7 @@ Provision MySQL Database Service (MDS) and Heatwave with Terraform.
 If you execute the above terraform code in oci, it make the below service like diagram which the heatwave node is disabled.
 <img width="802" alt="image" src="https://user-images.githubusercontent.com/8789421/213102145-3a14870d-7a6a-4a54-a1fb-d2eee02c4d58.png">
 
-한국 춘천센터 기준 HeatWave 노드를 제외하고 위에 그림처럼 구성 되는데 대략 15분 정도 소요됨.
+한국 춘천센터 기준 위에 그림처럼 구성 되는데 대략 25분 정도 소요됨.
 
 # Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
