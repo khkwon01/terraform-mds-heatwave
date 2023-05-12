@@ -22,7 +22,7 @@ If you execute the above terraform code in oci, it make the below service like d
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test --output-document=census_test.csv
     - DB 작업
       ```
-      mysqlsh --uri admin@<your ip> --mc    # class mode
+      mysqlsh --uri admin@<your ip> --mc --sql   # class mode
       DROP DATABASE IF EXISTS census;
       CREATE DATABASE census;
       USE census;
