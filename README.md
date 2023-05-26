@@ -12,7 +12,7 @@ If you execute the above terraform code in oci, it make the below service like d
 한국 춘천센터 기준 위에 그림처럼 구성 되는데 대략 25분 정도 소요됨.
 
 # HeatWave 기본동작
-image.png
+![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/85a41d10-0f19-405d-a883-f4af7b657151)
 
 # Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
