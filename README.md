@@ -100,4 +100,5 @@ If you execute the above terraform code in oci, it make the below service like d
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
       ```
-  - Census 머신러닝
+  - Electricity consumption(time forcasting) 머신러닝
+    - 데이터 다운로드
