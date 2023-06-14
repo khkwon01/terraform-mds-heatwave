@@ -74,6 +74,9 @@ If you execute the above terraform code in oci, it make the below service like d
       - table이 heatwave로 load 되었는지 확인   
         SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables,performance_schema.rpd_table_id   
         WHERE rpd_tables.ID = rpd_table_id.ID;
+      - Query 수행시 out-of-memory 발생시    
+        Heatwave는 memory 보다는 network usage에 맞춰 최적화가 되었기 때문에, 아래와 같은 명령어 변경이 가능    
+        SET SESSION rapid_execution_strategy = MIN_MEM_CONSUMPTION;
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
