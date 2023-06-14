@@ -14,7 +14,18 @@ If you execute the above terraform code in oci, it make the below service like d
 # HeatWave 기본동작
 ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/85a41d10-0f19-405d-a883-f4af7b657151)
 
-# Demo scenario
+# HeatWave OLTP for accelerated processing   
+(Public Document : https://dev.mysql.com/doc/heatwave/en/mys-hw-analytics.html)    
+- 변경된 데이터 Propagation 조건 (MDS --> Heatwave Node, batch transactions)
+  - 매 200ms
+  - change propagation buffer가 64MB 도달할때
+  - 변경된 데이터가 heatwave query에서 사용될때       
+  * 상태 체크 (on이면 정상)
+  SELECT VARIABLE_VALUE
+          FROM performance_schema.global_status
+          WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
+          
+# ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
 - ML Test
   - IRIS 머신러닝
