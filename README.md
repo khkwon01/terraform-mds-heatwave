@@ -25,7 +25,8 @@ If you execute the above terraform code in oci, it make the below service like d
   - HeatWave load시 데이터 compression disable   
     - set session rapid_compression=OFF 
   - HeatWave 데이터 load/unload
-    - auto load schema : CALL sys.heatwave_load(JSON_ARRAY("tpch"),NULL);     # dry run시 NULL 대신 JSON_OBJECT("mode","dryrun")
+    - auto load schema : CALL sys.heatwave_load(JSON_ARRAY("tpch"),NULL);  // dry run시 NULL 대신 JSON_OBJECT("mode","dryrun")
+      - auto parallel load 예제 : https://dev.mysql.com/doc/heatwave/en/mys-hw-auto-parallel-load-examples.html
     - 수동 load table : alter table orders secondary_load;
     - 수동 unload table : alter table orders secondary_unload;
   - HeatWave 데이터 load시 오류체크 (auto load시 에러 정보 출력)
@@ -39,7 +40,25 @@ If you execute the above terraform code in oci, it make the below service like d
       SELECT VARIABLE_VALUE
       FROM performance_schema.global_status
       WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
-          
+  - load 진행 상태 확인
+    - 데이터 load시 % 진행상태   
+      SELECT VARIABLE_VALUE FROM performance_schema.global_status    
+      WHERE VARIABLE_NAME = 'rapid_load_progress'; 
+    - 데이터 load 상태 확인   
+      SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables, performance_schema.rpd_table_id    
+      WHERE rpd_tables.ID = rpd_table_id.ID; 
+- Query 수행
+  - Query offload 조건   
+    아래 조건이 만족하지 않으면, 수행되는 Query는 MDS에서 수행이 됨.
+    - query문중 select만 (insert ~ select, create table ~ select에서도 select만 사용가능)
+    - query에 사용되는 table은 rapid 엔진으로 정의되고, heatwave로 load 되어야 함
+    - autocommit은 enable 되어 있어야 함
+    - query는 heatwave가 지원 가능한 타입을 사용해야만 하고 제약 사항을 피해야 함
+      - 데이터 지원 타입 : https://dev.mysql.com/doc/heatwave/en/mys-hw-function-operator-reference.html
+      - 제약 사항 : https://dev.mysql.com/doc/heatwave/en/mys-hw-limitations.html
+    
+      
+   
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
 - ML Test
