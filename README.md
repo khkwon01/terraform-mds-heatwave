@@ -21,16 +21,24 @@ If you execute the above terraform code in oci, it make the below service like d
   - table은 innodb table 사용 가능 (변경 : alter table table명 engine=InnoDb)
   - table에 PK(1개 컬럼, 숫자타입 권장)는 필수 (변경 : alter table table명 add primary key (컬럼))
   - table 컬럼 크기는 65532 byte 이하, 테이블당 컬럼 개수는 900 이하
-- 변경된 데이터 Propagation 조건 (MDS --> Heatwave Node, batch transactions)
-  - 매 200ms
-  - change propagation buffer가 64MB 도달할때
-  - 변경된 데이터가 heatwave query에서 사용될때       
-  > * 상태 체크 (on이면 정상)     
-    SELECT VARIABLE_VALUE
-    FROM performance_schema.global_status
-    WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
-- HeatWave load시 데이터 compression disable   
-  - set session rapid_compression=OFF 
+- 데이터 Load
+  - HeatWave load시 데이터 compression disable   
+    - set session rapid_compression=OFF 
+  - HeatWave 데이터 load/unload
+    - auto load schema : CALL sys.heatwave_load(JSON_ARRAY("tpch"),NULL);  
+    - 수동 load table : alter table orders secondary_load;
+    - 수동 unload table : alter table orders secondary_unload;
+  - HeatWave 데이터 load시 오류체크 (auto load시 에러 정보 출력)
+    - 에러 확인 : SELECT log FROM sys.heatwave_autopilot_report WHERE type="error";
+    - 경고 확인 : SELECT log FROM sys.heatwave_autopilot_report WHERE type="warn";
+  - 변경된 데이터 Propagation 조건 (MDS --> Heatwave Node, batch transactions)
+    - 매 200ms
+    - change propagation buffer가 64MB 도달할때
+    - 변경된 데이터가 heatwave query에서 사용될때       
+    > * 상태 체크 (on이면 정상)     
+      SELECT VARIABLE_VALUE
+      FROM performance_schema.global_status
+      WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
           
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
