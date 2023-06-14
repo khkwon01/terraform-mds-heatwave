@@ -21,9 +21,9 @@ If you execute the above terraform code in oci, it make the below service like d
   - change propagation buffer가 64MB 도달할때
   - 변경된 데이터가 heatwave query에서 사용될때       
   * 상태 체크 (on이면 정상)     
-  SELECT VARIABLE_VALUE
-          FROM performance_schema.global_status
-          WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
+    SELECT VARIABLE_VALUE
+    FROM performance_schema.global_status
+    WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
           
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
