@@ -47,17 +47,33 @@ If you execute the above terraform code in oci, it make the below service like d
     - 데이터 load 상태 확인   
       SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables, performance_schema.rpd_table_id    
       WHERE rpd_tables.ID = rpd_table_id.ID; 
-- Query 수행
-  - Query offload 조건   
-    아래 조건이 만족하지 않으면, 수행되는 Query는 MDS에서 수행이 됨.
+- HeatWave 노드 Query 수행
+  - HeatWave 노드 Query offload 조건   
+    **아래 조건이 만족하지 않으면, 수행되는 Query는 MDS에서 실행이 됨.**
     - query문중 select만 (insert ~ select, create table ~ select에서도 select만 사용가능)
     - query에 사용되는 table은 rapid 엔진으로 정의되고, heatwave로 load 되어야 함
     - autocommit은 enable 되어 있어야 함
     - query는 heatwave가 지원 가능한 타입을 사용해야만 하고 제약 사항을 피해야 함
       - 데이터 지원 타입 : https://dev.mysql.com/doc/heatwave/en/mys-hw-function-operator-reference.html
       - 제약 사항 : https://dev.mysql.com/doc/heatwave/en/mys-hw-limitations.html
-    
-      
+  - HeatWave Query 수행
+    - 실제 Heatwave 노드에서 Query 수행여부 사전체크   
+      EXPLAIN SELECT O_ORDERPRIORITY, COUNT(*) AS ORDER_COUNT ~~   
+      위 실행계획에서 extra 컬럼에 "using secondary engine RAPID" 라고 표시 되어야 사용가능
+    - MDS와 HeatWave offload시 성능 비교
+      - offload 쿼리 수행 (heatwave 노드에서 수행)
+      - SET SESSION use_secondary_engine=OFF; (heatwave 사용 disable)
+      - offload 쿼리 수행 (mds에서 수행)
+    - HeatWave로 쿼리가 offload 안될 경우 troubleshooting     
+      - query cost 기준 (> 100,000 커야 offload 됨)    
+        빠른 Query가 HeatWave 노드로 offload 되는 것을 피하기 위해 query cost 기준을 넘어야 함    
+        * 쿼리 cost 확인 절차   
+          SET SESSION use_secondary_engine=OFF;   
+          EXPLAIN select_query;    
+          SHOW STATUS LIKE 'Last_query_cost';    
+      - table이 heatwave로 load 되었는지 확인   
+        SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables,performance_schema.rpd_table_id   
+        WHERE rpd_tables.ID = rpd_table_id.ID;
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
