@@ -25,7 +25,7 @@ If you execute the above terraform code in oci, it make the below service like d
   - HeatWave load시 데이터 compression disable   
     - set session rapid_compression=OFF 
   - HeatWave 데이터 load/unload
-    - auto load schema : CALL sys.heatwave_load(JSON_ARRAY("tpch"),NULL);  
+    - auto load schema : CALL sys.heatwave_load(JSON_ARRAY("tpch"),NULL);     # dry run시 NULL 대신 JSON_OBJECT("mode","dryrun")
     - 수동 load table : alter table orders secondary_load;
     - 수동 unload table : alter table orders secondary_unload;
   - HeatWave 데이터 load시 오류체크 (auto load시 에러 정보 출력)
