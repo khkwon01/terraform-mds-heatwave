@@ -95,7 +95,10 @@ If you execute the above terraform code in oci, it make the below service like d
         </pre>
       - 수행 query offload 강제   
         시스템 설정 : set session use_secondary_engin = FORCED;   // select 쿼리가 heatwave offload 되지 않으면 에러    
-        쿼리 hint : select /*+ SET_VAR(user_secondary_engine = FORCED) */ ~~ from 
+        쿼리 hint : select /*+ SET_VAR(user_secondary_engine = FORCED) */ ~~ from    
+    - 기존 history 쿼리 기반 advisor 수행 (기존 수행된 내용중 개선 사항 확인)
+       CALL sys.heatwave_advisor(JSON_OBJECT("target_schema",JSON_ARRAY("tpch_1024")));  // schema 기준 확인    
+       CALL sys.heatwave_advisor(JSON_OBJECT("query_insights", TRUE));   // 쿼리 기준 확인
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
