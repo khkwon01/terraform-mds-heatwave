@@ -93,6 +93,9 @@ If you execute the above terraform code in oci, it make the below service like d
           JSON_EXTRACT(JSON_UNQUOTE(qexec_text->'$**.error'),'$[0]') AS error_message
           FROM performance_schema.rpd_query_stats;
         </pre>
+      - 수행 query offload 강제   
+        시스템 설정 : set session use_secondary_engin = FORCED;   // select 쿼리가 heatwave offload 되지 않으면 에러    
+        쿼리 hint : select /*+ SET_VAR(user_secondary_engine = FORCED) */ ~~ from 
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
