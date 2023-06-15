@@ -29,7 +29,7 @@ If you execute the above terraform code in oci, it make the below service like d
       - auto parallel load 예제 : https://dev.mysql.com/doc/heatwave/en/mys-hw-auto-parallel-load-examples.html
     - 수동 load table : alter table orders secondary_load;
     - 수동 unload table : alter table orders secondary_unload;
-  - HeatWave 데이터 load시 오류체크 (auto load시 에러 정보 출력)
+  - HeatWave 데이터 load시 오류체크 (auto load시 에러 정보 출력, load 세션에서만 )
     - 에러 확인 : SELECT log FROM sys.heatwave_autopilot_report WHERE type="error";
     - 경고 확인 : SELECT log FROM sys.heatwave_autopilot_report WHERE type="warn";
   - 변경된 데이터 Propagation 조건 (MDS --> Heatwave Node, batch transactions)
@@ -77,6 +77,13 @@ If you execute the above terraform code in oci, it make the below service like d
       - Query 수행시 out-of-memory 발생시    
         Heatwave는 memory 보다는 network usage에 맞춰 최적화가 되었기 때문에, 아래와 같은 명령어 변경이 가능    
         SET SESSION rapid_execution_strategy = MIN_MEM_CONSUMPTION;
+      - query debug (Offload 되지 않은 이유확인)     
+        SET SESSION optimizer_trace="enabled=on";    
+        SET optimizer_trace_offset=-2;    
+        explain query ~~    
+        SELECT QUERY, TRACE->'$**.Rapid_Offload_Fails', TRACE->'$**.secondary_engine_not_used'     
+        FROM INFORMATION_SCHEMA.OPTIMIZER_TRACE;     
+        
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
