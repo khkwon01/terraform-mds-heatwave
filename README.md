@@ -77,13 +77,22 @@ If you execute the above terraform code in oci, it make the below service like d
       - Query 수행시 out-of-memory 발생시    
         Heatwave는 memory 보다는 network usage에 맞춰 최적화가 되었기 때문에, 아래와 같은 명령어 변경이 가능    
         SET SESSION rapid_execution_strategy = MIN_MEM_CONSUMPTION;
-      - query debug (Offload 되지 않은 이유확인)     
+      - query debug (Offload 되지 않은 이유확인)
+        <pre>     
         SET SESSION optimizer_trace="enabled=on";    
         SET optimizer_trace_offset=-2;    
         explain query ~~    
         SELECT QUERY, TRACE->'$**.Rapid_Offload_Fails', TRACE->'$**.secondary_engine_not_used'     
         FROM INFORMATION_SCHEMA.OPTIMIZER_TRACE;     
-        
+        </pre>
+      - 수행 query history 확인   
+        <pre>
+        SELECT query_id,    
+          JSON_EXTRACT(JSON_UNQUOTE(qkrn_text->'$**.sessionId'),'$[0]') AS session_id, 
+          JSON_EXTRACT(JSON_UNQUOTE(qkrn_text->'$**.accumulatedRapidCost'),'$[0]') AS time_in_ns, 
+          JSON_EXTRACT(JSON_UNQUOTE(qexec_text->'$**.error'),'$[0]') AS error_message
+          FROM performance_schema.rpd_query_stats;
+        </pre>
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
