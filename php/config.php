@@ -1,6 +1,6 @@
 <?php
 // Database credentials
-define('DB_SERVER', '10.0.20.40');// MDS server IP address
+define('DB_SERVER', '<<mds-ip>>');// MDS server IP address
 define('DB_USERNAME', 'admin');
 define('DB_PASSWORD', 'Welcome#1');
 define('DB_NAME', 'census');
