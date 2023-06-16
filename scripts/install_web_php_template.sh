@@ -23,6 +23,6 @@ phpinfo();
 sudo wget https://github.com/khkwon01/terraform-mds-heatwave/raw/main/php/census.tar
 sudo tar -xvf census.tar -C /var/www/html
 
-sudo sed -i 's/<<mds-ip>>/${oci_core_instance.operator.public_ip}/g' /var/www/html/config.php
+sudo sed -i 's/<<MDS-IP>>/${oci_core_instance.operator.public_ip}/g' /var/www/html/config.php
 
 echo "The apache and php successfully installed !"
