@@ -99,6 +99,16 @@ If you execute the above terraform code in oci, it make the below service like d
     - 기존 Heatwave query history 쿼리 기반 advisor 수행 (기존 수행된 내용중 개선 사항 확인)    
        CALL sys.heatwave_advisor(JSON_OBJECT("target_schema",JSON_ARRAY("tpch_1024")));  // schema 기준 확인    
        CALL sys.heatwave_advisor(JSON_OBJECT("query_insights", TRUE));   // 쿼리 기준 확인
+    - HeatWave 노드 추가 필요성 확인
+      - 데이터 사이즈가 400GB(비압축, 압축 :800G)보다 클 경우 HeatWave 노드 추가    
+        SELECT table_schema "DB Name",
+            ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB" 
+        FROM information_schema.tables 
+        GROUP BY table_schema; 
+      - sys.heatwave_advisor 수행후 결과 검토시 추가
+      - HeatWave 노드에서 estimate node 수행후 권장시 추가
+        ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/3ea563ef-acbb-465c-8a36-2945de9729af)
+
    
 # ML Demo scenario
 - HeatWave : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
