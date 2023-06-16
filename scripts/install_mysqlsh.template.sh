@@ -10,7 +10,4 @@ sudo echo '{
 }' | sudo tee -a ~${user}/.mysqlsh/options.json
 sudo chown -R ${user} ~${user}/.mysqlsh
 
-# download for tpc-h data
-sudo wget https://drive.google.com/file/d/1K-ZqxSZ_paxTFIYAFCxfqdcagvUjmy3g/view?usp=sharing
-
 echo "MySQL Shell successfully installed !"
