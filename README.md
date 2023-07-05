@@ -15,6 +15,11 @@ If you execute the above terraform code in oci, it make the below service like d
 (관련 Doc URL : https://dev.mysql.com/doc/heatwave/en/mys-hw-introduction.html)
 ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/85a41d10-0f19-405d-a883-f4af7b657151)
 
+- In-Memory Hybrid-Columnar Format
+- Massively Parallel Architecture
+  ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/c52407cd-2815-4141-aab8-5688e1e71c4f)
+- Push-Based Vectorized Query Processing
+
 # HeatWave OLTP for accelerated processing (v8.0.33 기준)
 (Public Document : https://dev.mysql.com/doc/heatwave/en/mys-hw-analytics.html)
 - HeatWave 사용하기 위한 조건    
