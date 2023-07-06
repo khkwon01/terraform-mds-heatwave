@@ -118,6 +118,20 @@ If you execute the above terraform code in oci, it make the below service like d
   - https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
         
 # ML Demo scenario
+- ML 사용 위한 조건
+  - model catalog 정보는 ML_SCHEMA_user명으로 생성됨 (참고 joe.smith와 같은 user명은 사용불가)
+  - ML용 테이블 데이터는 10GB, 100 million rows, 900 columns를 초과 할 수 없음
+  - 너무 많은 메모리를 사용하는 걸 피하기 위해 Heatwave에 모델 로드는 3개까지 가능함
+  - ML 모델 사이즈는 900MB이상은 지원하지 않으며, 초과시 에러가 발생
+  - ML query progress 모니터링은 현재 지원하지 않음
+  - ML_EXPLAIN_TABLE, ML_PREDICT_TABLE은 compute 리소스가 많이 소요됨으로, 큰 사이즈에 테이블을 작은 테이블(10 ~ 100 rows)로 분리하여 수행하는 걸 권장
+  - Ctrl+C를 통한 작업 취소는 ML_TRAIN, ML_EXPLAIN_ROW, ML_EXPLAIN_TABLE만 지원
+  - ML_EXPLAIN_* 는 가장 연관성이 큰 100개 features로 제한
+  - 동시에 HeatWave analytics와 AutoML 쿼리는 지원되지 않음 (하나가 끝나야 다른 쿼리가 수행, analytics 쿼리가 우선함)
+  - AWS는 HeatWave.256GB shape만 AutoML를 지원
+  - AutoML에서 지원하는 테이블 데이터 타입은 아래와 같음
+    https://dev.mysql.com/doc/heatwave/en/mys-hwaml-supported-data-types.html
+    
 - ML Test
   - IRIS 머신러닝
     - 실습 URL : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3306&p210_wec=&session=374748331881
