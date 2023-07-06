@@ -129,7 +129,7 @@ If you execute the above terraform code in oci, it make the below service like d
   - ML_EXPLAIN_* 는 가장 연관성이 큰 100개 features로 제한
   - 동시에 HeatWave analytics와 AutoML 쿼리는 지원되지 않음 (하나가 끝나야 다른 쿼리가 수행, analytics 쿼리가 우선함)
   - AWS는 HeatWave.256GB shape만 AutoML를 지원
-  - AutoML에서 지원하는 테이블 데이터 타입은 아래와 같음
+  - AutoML에서 지원하는 테이블 데이터 타입은 아래와 같음    
     https://dev.mysql.com/doc/heatwave/en/mys-hwaml-supported-data-types.html
     
 - ML Test
