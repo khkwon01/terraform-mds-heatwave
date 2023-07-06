@@ -202,3 +202,23 @@ If you execute the above terraform code in oci, it make the below service like d
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
       ```
+- ONNX 구성 (python 기준)
+  - install ONNX Runtime
+    - pip install onnxruntime   ( GPU : pip install onnxruntime-gpu )
+  - install ONNX per each model
+    - pytorch
+      pip install torch
+    - tensorflow
+      pip install tf2onnx
+    - sklearn
+      pip install skl2onnx
+  - export the model of sklearn into ONNX format
+    ```
+    from skl2onnx import convert_sklearn
+    from skl2onnx.common.data_types import FloatTensorType
+
+    initial_type = [('float_input', FloatTensorType([None, 4]))]
+    onx = convert_sklearn(clr, initial_types=initial_type)
+    with open("logreg_iris.onnx", "wb") as f:
+      f.write(onx.SerializeToString())
+    ```
