@@ -206,11 +206,11 @@ If you execute the above terraform code in oci, it make the below service like d
   - install ONNX Runtime
     - pip install onnxruntime   ( GPU : pip install onnxruntime-gpu )
   - install ONNX per each model
-    - pytorch
+    - pytorch   
       pip install torch
-    - tensorflow
+    - tensorflow    
       pip install tf2onnx
-    - sklearn
+    - sklearn    
       pip install skl2onnx
   - export the model of sklearn into ONNX format
     ```
