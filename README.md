@@ -119,7 +119,7 @@ If you execute the above terraform code in oci, it make the below service like d
         
 # ML Demo scenario
 - ML 사용 위한 조건
-  - model catalog 정보는 ML_SCHEMA_user명으로 생성됨 (참고 joe.smith와 같은 user명은 사용불가)
+  - model catalog 정보는 ML_SCHEMA_user명으로 생성됨 (참고 joe.smith와 같은 user명은 사용불가)  
   - ML용 테이블 데이터는 10GB, 100 million rows, 900 columns를 초과 할 수 없음
   - 너무 많은 메모리를 사용하는 걸 피하기 위해 Heatwave에 모델 로드는 3개까지 가능함
   - ML 모델 사이즈는 900MB이상은 지원하지 않으며, 초과시 에러가 발생
