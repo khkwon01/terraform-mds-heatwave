@@ -222,3 +222,25 @@ If you execute the above terraform code in oci, it make the below service like d
     with open("logreg_iris.onnx", "wb") as f:
       f.write(onx.SerializeToString())
     ```
+  - import the model as ONNX type into HeatWave
+    ```
+    // 1. convert type into base64
+    python -c "import onnx; import base64;
+    open('iris_base64.onnx', 'wb').write(base64.b64encode(onnx.load('logreg_iris.onnx').SerializeToString()))"
+
+    // 2. connect heatwave and then create temporary table for uploading the model
+    mysql> CREATE TEMPORARY TABLE onnx_temp (onnx_string LONGTEXT);
+
+    // 3. load the model data into the temporary table using "LOAD DATA INFILE" command in mysql
+    mysql> LOAD DATA INFILE 'iris_base64.onnx'
+           INTO TABLE onnx_temp
+           CHARACTER SET binary
+           FIELDS TERMINATED BY '\t'
+           LINES TERMINATED BY '\r' (onnx_string);
+
+    // 4. select the uploaded model from table into a session variable.
+    mysql> SELECT onnx_string FROM onnx_temp INTO @onnx_encode;
+
+    // 5. load the model into HeatWave using the above session variable.
+    mysql> CALL sys.ML_MODEL_IMPORT(@onnx_encode, NULL, 'iris_onnx');
+    ```
