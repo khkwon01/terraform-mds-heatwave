@@ -244,7 +244,7 @@ If you execute the above terraform code in oci, it make the below service like d
       CALL sys.ML_PREDICT_TABLE('census.census_test', @census_model, 'census.census_test_predictions', NULL);
       
       -- explain for whole test table
-      CALL sys.ML_EXPLAIN_TABLE('census.census_test', @census_model, 'census.census_test_predictions', JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+      CALL sys.ML_EXPLAIN_TABLE('census.census_test', @census_model, 'census.census_test_explanations', JSON_OBJECT('prediction_explainer', 'permutation_importance'));
       
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
