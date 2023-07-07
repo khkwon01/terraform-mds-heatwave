@@ -135,9 +135,35 @@ If you execute the above terraform code in oci, it make the below service like d
 - ML Test
   - IRIS 머신러닝
     - 실습 URL : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3306&p210_wec=&session=374748331881
-    ```
-    
-    ```
+    - DB 작업
+      ```
+      // iris 데이터 파일 다운로드 (위치 data/iris_ml_data.sql)
+      mysqlsh --uri admin@<your ip> --sql
+      source iris_ml_data.sql
+
+      // 모델 훈련
+      CALL sys.ML_TRAIN('ml_data.iris_train', 'class',JSON_OBJECT('task', 'classification'), @iris_model);
+
+      // 생성된 모델 확인
+      SELECT model_id, model_handle, train_table_name FROM ML_SCHEMA_admin.MODEL_CATALOG;
+
+      // Heatwave 모델 load
+      CALL sys.ML_MODEL_LOAD(@iris_model, NULL);
+
+      // 개별 row predict 테스트
+      SET @row_input = JSON_OBJECT("sepal length", 7.3, "sepal width", 2.9, "petal length", 6.3, "petal width", 1.8);
+      SELECT sys.ML_PREDICT_ROW(@row_input, @iris_model, NULL);
+      // 개별 row 예측 결과 설명 (explain)
+      SELECT sys.ML_EXPLAIN_ROW(@row_input, @iris_model, JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+
+      // table predict 테스트
+      CALL sys.ML_PREDICT_TABLE('ml_data.iris_test', @iris_model, 'ml_data.iris_predictions', NULL);
+      // table 예측 결과 설명
+      CALL sys.ML_EXPLAIN_TABLE('ml_data.iris_test',@iris_model,'ml_data.iris_explanations', JSON_OBJECT('prediction_explainer', 'permutation_importance'));
+
+      // 모델 unload
+      CALL sys.ML_MODEL_UNLOAD(@iris_model);
+      ```
   - Census 머신러닝
     - 데이터 다운로드
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data --output-document=census_train.csv
