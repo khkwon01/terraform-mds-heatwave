@@ -135,7 +135,7 @@ If you execute the above terraform code in oci, it make the below service like d
 - ML Test
   - IRIS 머신러닝
     - 실습 URL : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3306&p210_wec=&session=374748331881
-    - DB 작업
+    - DB 및 ML 작업
       ```
       // iris 데이터 파일 다운로드 (위치 data/iris_ml_data.sql)
       mysqlsh --uri admin@<your ip> --sql
@@ -172,7 +172,7 @@ If you execute the above terraform code in oci, it make the below service like d
     - 데이터 다운로드
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data --output-document=census_train.csv
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test --output-document=census_test.csv
-    - DB 작업
+    - DB 및 ML 작업
       ```
       mysqlsh --uri admin@<your ip> --mc --sql   # class mode
       DROP DATABASE IF EXISTS census;
