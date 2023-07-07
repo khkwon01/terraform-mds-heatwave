@@ -135,6 +135,9 @@ If you execute the above terraform code in oci, it make the below service like d
 - ML Test
   - IRIS 머신러닝
     - 실습 URL : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3306&p210_wec=&session=374748331881
+    ```
+    
+    ```
   - Census 머신러닝
     - 데이터 다운로드
       - wget https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data --output-document=census_train.csv
