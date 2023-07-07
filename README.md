@@ -161,6 +161,10 @@ If you execute the above terraform code in oci, it make the below service like d
       // table 예측 결과 설명
       CALL sys.ML_EXPLAIN_TABLE('ml_data.iris_test',@iris_model,'ml_data.iris_explanations', JSON_OBJECT('prediction_explainer', 'permutation_importance'));
 
+      // 모델 정확도 확인
+      CALL sys.ML_SCORE('ml_data.iris_validate', 'class', @iris_model, 'balanced_accuracy', @score, NULL);
+      SELECT @score;
+      
       // 모델 unload
       CALL sys.ML_MODEL_UNLOAD(@iris_model);
       ```
