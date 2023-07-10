@@ -223,13 +223,13 @@ If you execute the above terraform code in oci, it make the below service like d
       -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score);
       -- CALL sys.ML_SCORE('census.census_test', 'revenue', @census_model, 'balanced_accuracy', @score, NULL);
       CALL sys.ML_SCORE('census.census_train', 'revenue', @census_model, 'accuracy', @score, NULL);
-      CALL sys.ML_SCORE('census.census_train', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold',0));
+      -- CALL sys.ML_SCORE('census.census_train', 'revenue', @census_model, 'balanced_accuracy', @score, JSON_OBJECT('threshold',0));
       
       -- Select score
       select @score;
       
       -- See the detail of model
-      SELECT JSON_Pretty(model_explanation) FROM ML_SCHEMA_admin.MODEL_CATALOG WHERE model_handle=@census_model;
+      SELECT json_pretty(json_extract(model_explanation, "$.permutation_importance")) FROM ML_SCHEMA_admin.MODEL_CATALOG WHERE model_handle=@census_model;
       
       -- Specify 1 row example
       set @row_input = '{"age": 38,"workclass": "Private","fnlwgt": 89814,"education": "HS-grad","education-num": 9,"marital-status": "Married-civ-spouse","occupation": "Farming-fishing","relationship": "Husband","race": "White","sex": "Male","capital-gain": 0,"capital-loss": 0,"hours-per-week": 50,"native-country": "United-States"}' ;
