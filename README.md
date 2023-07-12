@@ -45,7 +45,7 @@ If you execute the above terraform code in oci, it make the below service like d
     - 데이터 load 상태 확인   
       SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables, performance_schema.rpd_table_id    
       WHERE rpd_tables.ID = rpd_table_id.ID; 
-  - 변경된 데이터 Propagation 조건 (MDS --> Heatwave Node, batch transactions)
+  - 변경된 데이터 Propagation(동기화) 조건 (MDS --> Heatwave Node, batch transactions)
     - 매 200ms
     - change propagation buffer가 64MB 도달할때
     - 변경된 데이터가 heatwave query에서 사용될때       
