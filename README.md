@@ -38,6 +38,13 @@ If you execute the above terraform code in oci, it make the below service like d
   - HeatWave 데이터 load시 오류체크 (auto load시 에러 정보 출력, load 세션에서만 )
     - 에러 확인 : SELECT log FROM sys.heatwave_autopilot_report WHERE type="error";
     - 경고 확인 : SELECT log FROM sys.heatwave_autopilot_report WHERE type="warn";
+  - load 진행 상태 확인
+    - 데이터 load시 % 진행상태   
+      SELECT VARIABLE_VALUE FROM performance_schema.global_status    
+      WHERE VARIABLE_NAME = 'rapid_load_progress'; 
+    - 데이터 load 상태 확인   
+      SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables, performance_schema.rpd_table_id    
+      WHERE rpd_tables.ID = rpd_table_id.ID; 
   - 변경된 데이터 Propagation 조건 (MDS --> Heatwave Node, batch transactions)
     - 매 200ms
     - change propagation buffer가 64MB 도달할때
@@ -46,13 +53,7 @@ If you execute the above terraform code in oci, it make the below service like d
       SELECT VARIABLE_VALUE
       FROM performance_schema.global_status
       WHERE VARIABLE_NAME = 'rapid_change_propagation_status';   
-  - load 진행 상태 확인
-    - 데이터 load시 % 진행상태   
-      SELECT VARIABLE_VALUE FROM performance_schema.global_status    
-      WHERE VARIABLE_NAME = 'rapid_load_progress'; 
-    - 데이터 load 상태 확인   
-      SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables, performance_schema.rpd_table_id    
-      WHERE rpd_tables.ID = rpd_table_id.ID; 
+
 - HeatWave 노드 Query 수행
   - HeatWave 노드 Query offload 조건   
     **아래 조건이 만족하지 않으면, 수행되는 Query는 MDS에서 실행이 됨.**
