@@ -177,8 +177,7 @@ resource oci_core_security_list operator-seclist {
     tcp_options {
       max = "22"
       min = "22"
-    }
-    
+    }    
   }
   ingress_security_rules {
     
@@ -190,6 +189,14 @@ resource oci_core_security_list operator-seclist {
       max = "80"
       min = "80" 
     }
+  ingress_security_rules {
+    
+    protocol    = "all"
+    source      = "10.0.20.0/24"
+    source_type = "CIDR_BLOCK"
+    stateless   = "true"
+    
+  }
     
   }  
   vcn_id = oci_core_vcn.mds-vcn.id
