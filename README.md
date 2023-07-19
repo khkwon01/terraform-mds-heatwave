@@ -115,7 +115,7 @@ If you execute the above terraform code in oci, it make the below service like d
       - sys.heatwave_advisor 수행후 결과 검토시 추가
       - HeatWave 노드에서 estimate node 수행후 권장시 추가
         ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/3ea563ef-acbb-465c-8a36-2945de9729af)    
-- HeatWave OLAP Demo
+- HeatWave OLAP Demo     
   (참고자료 : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157)    
   - 테스트 데이터 다운로드
     ```
