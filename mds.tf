@@ -21,6 +21,12 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     mysql_version = var.mysql_db_version
     configuration_id = oci_mysql_mysql_configuration.MDSinstance_configuration.id
     hostname_label = var.mds_instance_name
+    backup_policy {
+        is_enabled = false
+    }
+    maintenance {
+        window_start_time = "fri 22:00"
+    }
 }
 
 resource "oci_mysql_heat_wave_cluster" "HeatWave" {
