@@ -116,8 +116,65 @@ If you execute the above terraform code in oci, it make the below service like d
       - HeatWave 노드에서 estimate node 수행후 권장시 추가
         ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/3ea563ef-acbb-465c-8a36-2945de9729af)    
 - HeatWave OLAP Demo
-  - https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157
-        
+  (참고자료 : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157)    
+  - 테스트 데이터 다운로드
+    ```
+    cd /home/opc
+    wget -O airport-db.zip https://bit.ly/3pZ1PiW
+    unzip airport-db.zip 
+    cd airport-db
+    ```
+  - 테스트 데이터 HeatWave MDS로 import
+    ```
+    mysqlsh --user=admin --password=Welcome#1 --host=<heatwave_private_ip_address> --port=3306 --js
+    util.loadDump("/home/opc/airport-db", {dryRun: false, threads: 8, resetProgress:true, ignoreVersion:true})
+    ```
+  - 테스트 데이터 HeatWave Node로 load
+    ```
+    CALL sys.heatwave_load(JSON_ARRAY('airportdb'), NULL);
+    // load 상태 확인    
+    SELECT NAME, LOAD_STATUS FROM performance_schema.rpd_tables,performance_schema.rpd_table_id WHERE rpd_tables.ID = rpd_table_id.ID;
+    ```
+  - olap 속도 테스트
+    ```
+    USE airportdb;
+    SET SESSION use_secondary_engine=off;
+    SELECT
+    airline.airlinename,
+    AVG(datediff(departure,birthdate)/365.25) as avg_age,
+    count(*) as nb_people
+    FROM
+    booking, flight, airline, passengerdetails
+    WHERE
+    booking.flight_id=flight.flight_id AND
+    airline.airline_id=flight.airline_id AND
+    booking.passenger_id=passengerdetails.passenger_id AND
+    country IN ("SWITZERLAND", "FRANCE", "ITALY")
+    GROUP BY
+    airline.airlinename
+    ORDER BY
+    airline.airlinename, avg_age
+    LIMIT 10;
+
+    SET SESSION use_secondary_engine=on;
+    SELECT
+    airline.airlinename,
+    AVG(datediff(departure,birthdate)/365.25) as avg_age,
+    count(*) as nb_people
+    FROM
+    booking, flight, airline, passengerdetails
+    WHERE
+    booking.flight_id=flight.flight_id AND
+    airline.airline_id=flight.airline_id AND
+    booking.passenger_id=passengerdetails.passenger_id AND
+    country IN ("SWITZERLAND", "FRANCE", "ITALY")
+    GROUP BY
+    airline.airlinename
+    ORDER BY
+    airline.airlinename, avg_age
+    LIMIT 10;
+    ```
+  
 # ML Demo scenario
 - ML 사용 위한 조건
   - Model catalog 정보는 ML_SCHEMA_user명으로 생성됨 (참고 joe.smith와 같은 user명은 사용불가)  
