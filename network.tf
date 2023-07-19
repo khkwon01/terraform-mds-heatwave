@@ -189,6 +189,7 @@ resource oci_core_security_list operator-seclist {
       max = "80"
       min = "80" 
     }
+  }  
   ingress_security_rules {
     
     protocol    = "all"
@@ -197,8 +198,6 @@ resource oci_core_security_list operator-seclist {
     stateless   = "true"
     
   }
-    
-  }  
   vcn_id = oci_core_vcn.mds-vcn.id
 }
 
