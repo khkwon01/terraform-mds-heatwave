@@ -34,4 +34,5 @@ resource "oci_mysql_heat_wave_cluster" "HeatWave" {
     db_system_id = oci_mysql_mysql_db_system.MDSinstance.id
     cluster_size = var.mysql_heatwave_cluster_size
     shape_name   = var.mysql_heatwave_shape
+    isLakehouseEnabled = var.mysql_lakehouse_enabled ? 1 : 0
 }
