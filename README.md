@@ -114,7 +114,9 @@ If you execute the above terraform code in oci, it make the below service like d
         GROUP BY table_schema; 
       - sys.heatwave_advisor 수행후 결과 검토시 추가
       - HeatWave 노드에서 estimate node 수행후 권장시 추가
-        ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/3ea563ef-acbb-465c-8a36-2945de9729af)    
+        ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/3ea563ef-acbb-465c-8a36-2945de9729af)
+    - HeatWave 실행계획 수립이 시간이 오래 걸릴 경우 (search시간을 줄임)  
+      set optimizer_max_subgraph_pairs=8000   
 - HeatWave OLAP Demo     
   (참고자료 : https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/run-workshop?p210_wid=3157)    
   - 테스트 데이터 다운로드
