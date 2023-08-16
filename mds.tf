@@ -4,6 +4,7 @@ resource "oci_mysql_mysql_configuration" "MDSinstance_configuration" {
     display_name = var.mysql_db_configuration
     variables {
         sql_require_primary_key = false
+        binlog_expire_logs_seconds = 86400
 #        sql_generate_invisible_primary_key = true
     }
 }
