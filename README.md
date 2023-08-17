@@ -198,6 +198,9 @@ If you execute the above terraform code in oci, it make the below service like d
     - Query accross file and table
       
 # ML Demo scenario
+- ML 사용 케이스
+  ![image](https://github.com/khkwon01/terraform-mds-heatwave/assets/8789421/d359d0cc-168a-4931-aa9c-87adf9201198)
+
 - ML 사용 위한 조건
   - Model catalog 정보는 ML_SCHEMA_user명으로 생성됨 (참고 joe.smith와 같은 user명은 사용불가)  
   - ML용 테이블 데이터는 10GB, 100 million rows, 900 columns를 초과 할 수 없음
