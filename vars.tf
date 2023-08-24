@@ -63,6 +63,11 @@ variable "mysql_heatwave_enabled" {
   default     = false
 }
 
+variable "mysql_lakehouse_enabled" {
+  description = "Defines whether a MySQL Lakehouse is enabled or not"
+  default     = false
+}
+
 variable "mysql_heatwave_cluster_size" {
   description = "Number of MySQL HeatWave nodes to be created"
   default     = 1
