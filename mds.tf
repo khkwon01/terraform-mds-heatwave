@@ -24,6 +24,8 @@ resource "oci_mysql_mysql_db_system" "MDSinstance" {
     hostname_label = var.mds_instance_name
     backup_policy {
         is_enabled = false
+        retention_in_days = "10"
+        window_start_time = "01:00-07:00"
     }
     maintenance {
         window_start_time = "fri 22:00"
@@ -35,4 +37,5 @@ resource "oci_mysql_heat_wave_cluster" "HeatWave" {
     db_system_id = oci_mysql_mysql_db_system.MDSinstance.id
     cluster_size = var.mysql_heatwave_cluster_size
     shape_name   = var.mysql_heatwave_shape
+    is_lakehouse_enabled = var.mysql_lakehouse_enabled ? 1 : 0
 }
