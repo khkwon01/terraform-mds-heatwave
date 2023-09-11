@@ -1,6 +1,6 @@
 ## 1. MDS 지원 feature 리스트 (8.1.0 or 8.0.34)
 | 구분 | 지원여부 | Plugin 이름 | 설명 | 기타 |
-|---|:---|:---|:---|:---|
+|---|:----|:---|:--------|:---|
 | `Masking`     | 지원     | data_masking      | MySQL 8.0.34 Server, Shell, Monitor |
 | `TDE`         | 부분지원  |                   | MySQL 8.0.34 Server, Shell, Router(3번서버) |
 | `Encryption`  | 지원     |                   | MySQL 8.0.34 Server, Shell, Router(3번서버) |
