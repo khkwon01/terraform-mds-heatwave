@@ -14,6 +14,7 @@
 
 ## 2. 각 Features 사용 예제 
 ### 1) Masking 
+```
  MySQL  10.0.20.169:33060+ ssl  SQL > select gen_rnd_us_phone();
 +--------------------+
 | gen_rnd_us_phone() |
@@ -36,9 +37,10 @@
 | JXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXm |
 | TXXXXXXXXXXXXXXXXXXXl                 |
 +---------------------------------------+
-
+```
 ### 2) Encryption
- MySQL  10.0.20.169:33060+ ssl  airportdb  SQL > select AES_ENCRYPT('text',UNHEX('F3229A0B371ED2D9441B830D21A390C3'));
+```
+MySQL  10.0.20.169:33060+ ssl  airportdb  SQL > select AES_ENCRYPT('text',UNHEX('F3229A0B371ED2D9441B830D21A390C3'));
 
 +---------------------------------------------------------------+
 | AES_ENCRYPT('text',UNHEX('F3229A0B371ED2D9441B830D21A390C3')) |
@@ -68,4 +70,4 @@
 +----------------------------------------------------------+
 | 23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7 |
 +----------------------------------------------------------+
-
+```
