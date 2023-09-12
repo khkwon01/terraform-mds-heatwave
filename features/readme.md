@@ -142,7 +142,7 @@ JSON_PRETTY(CONVERT(audit_log_read('{ "start": { "timestamp": "2023-09-11 07:00:
                                                 ->  command,sql_command,command_status
                                                 -> FROM
                                                 -> JSON_TABLE
-                                                -> ( AUDIT_LOG_READ( '{ "start": {"timestamp": "2023-08-16 15:33:37"}, "max_array_length": 10 }' ), 
+                                                -> ( AUDIT_LOG_READ( '{ "start": {"timestamp": "2023-09-11 07:00:00"}, "max_array_length": 10 }' ), 
                                                 ->   '$[*]'
                                                 ->   COLUMNS
                                                 ->   ( ts TIMESTAMP PATH '$.timestamp',
