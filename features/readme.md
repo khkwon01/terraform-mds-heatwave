@@ -179,14 +179,14 @@ select * from error_log;
 select * from performance_schema.events_statements_history_long;
 
 # check slow query 
-SELECT query, exec_count, total_latency FROM sys.statements_with_runtimes_in_95th_percentile ORDER BY total_latency DESC LIMIT 5;
+SELECT query, exec_count, total_latency FROM sys.statements_with_runtimes_in_95th_percentile ORDER BY total_latency DESC LIMIT 5;
 
 # check query errors
-SELECT query, errors FROM sys.statements_with_errors_or_warnings ORDER BY errors DESC LIMIT 5;
+SELECT query, errors FROM sys.statements_with_errors_or_warnings ORDER BY errors DESC LIMIT 5;
 
 # assess latency per table
-SELECT table_name, total_latency, rows_fetched, avg_fetched_latency FROM sys.schema_table_statistics WHERE table_name IN ('table_1', 'table_2’) ORDER BY total_latency DESC;
+SELECT table_name, total_latency, rows_fetched, avg_fetched_latency FROM sys.schema_table_statistics WHERE table_name IN ('table_1', 'table_2’) ORDER BY total_latency DESC;
 
 # check index performance
-SELECT index_name, rows_selected FROM sys.schema_index_statistics WHERE table_name = 'your_table’ ORDER BY rows_selected DESC;
+SELECT index_name, rows_selected FROM sys.schema_index_statistics WHERE table_name = 'your_table’ ORDER BY rows_selected DESC;
 ```
