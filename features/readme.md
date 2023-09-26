@@ -185,8 +185,8 @@ SELECT query, exec_count, total_latency FROM sys.statements_with_runtimes_in_95t
 SELECT query, errors FROM sys.statements_with_errors_or_warnings ORDER BY errors DESC LIMIT 5;
 
 # assess latency per table
-SELECT table_name, total_latency, rows_fetched, avg_fetched_latency FROM sys.schema_table_statistics WHERE table_name IN ('table_1', 'table_2’) ORDER BY total_latency DESC;
+SELECT table_name, total_latency, rows_fetched, avg_fetched_latency FROM sys.schema_table_statistics WHERE table_name IN ('table_1', 'table_2’) ORDER BY total_latency DESC;
 
 # check index performance
-SELECT index_name, rows_selected FROM sys.schema_index_statistics WHERE table_name = 'your_table’ ORDER BY rows_selected DESC;
+SELECT index_name, rows_selected FROM sys.schema_index_statistics WHERE table_name = 'your_table’ ORDER BY rows_selected DESC;
 ```
