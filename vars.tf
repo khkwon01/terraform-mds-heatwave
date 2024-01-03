@@ -3,7 +3,7 @@ variable compartment_ocid { }
 variable tenancy_ocid { }
 variable region { }
 
-#variable tenancy_ocid { default = "ocid1.tenancy.oc1..aaaaaaaa4yet6xypq5khquqhozb7rja2cwomj4zvpxvqgusrnojr3t5rieiq" }
+#variable tenancy_ocid { default = "" }
 #variable region { default = "ap-seoul-1" }
 
 #network
