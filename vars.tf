@@ -4,7 +4,7 @@ variable tenancy_ocid { }
 variable region { }
 
 #variable tenancy_ocid { default = "ocid1.tenancy.oc1..aaaaaaaa4yet6xypq5khquqhozb7rja2cwomj4zvpxvqgusrnojr3t5rieiq" }
-#variable region { default = "ap-chuncheon-1" }
+#variable region { default = "ap-seoul-1" }
 
 #network
 
@@ -37,7 +37,7 @@ variable "mysql_db_system_admin_password" {
 }
 
 variable "mysql_shape_name" {
-  default = "MySQL.HeatWave.VM.Standard.E3"
+  default = "MySQL.HeatWave.VM.Standard"
 }
 
 variable "mysql_data_storage_in_gb" {
@@ -51,7 +51,7 @@ variable "deploy_mds_ha" {
 }
 
 variable "mysql_db_version" {
-  default = "8.1.0"
+  default = "8.0.35"
 }
 
 variable "mysql_db_configuration" {
@@ -75,5 +75,5 @@ variable "mysql_heatwave_cluster_size" {
 
 variable "mysql_heatwave_shape" {
   description = "The shape to be used instead of mysql_shape_name when mysql_heatwave_enabled = true."
-  default     = "MySQL.HeatWave.VM.Standard.E3"
+  default     = "MySQL.HeatWave.VM.Standard"
 }
