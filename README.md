@@ -292,6 +292,8 @@ If you execute the above terraform code in oci, it make the below service like d
     - ML 
       ```
       \sql
+      ALTER TABLE census_test DROP COLUMN revenue;
+      
       -- Set globa variables
       set @census_model = NULL;
       
