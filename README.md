@@ -289,7 +289,7 @@ If you execute the above terraform code in oci, it make the below service like d
       insert into census_train values (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_train_tmp;
       insert into census_test (age, workclass, fnlwgt, education, `education-num`, `marital-status`, occupation, relationship, race, sex, `capital-gain`, `capital-loss`, `hours-per-week`, `native-country`, revenue) select * from census_test_tmp;
       ```
-    - ML 
+    - ML 수행
       ```
       \sql
       ALTER TABLE census_test DROP COLUMN revenue;
@@ -336,6 +336,11 @@ If you execute the above terraform code in oci, it make the below service like d
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
       ```
+  - ML Monitoring
+    ```
+    SELECT * FROM performance_schema.rpd_query_stats;
+    ```
+
 - ONNX 구성 (python 기준)
   - install ONNX Runtime
     - pip install onnxruntime   ( GPU : pip install onnxruntime-gpu )
@@ -378,7 +383,4 @@ If you execute the above terraform code in oci, it make the below service like d
     // 5. load the model into HeatWave using the above session variable.
     mysql> CALL sys.ML_MODEL_IMPORT(@onnx_encode, NULL, 'iris_onnx');
     ```
-- ML Monitoring
-  ```
-  SELECT * FROM performance_schema.rpd_query_stats;
-  ```
+
