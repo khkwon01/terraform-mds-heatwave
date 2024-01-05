@@ -336,10 +336,10 @@ If you execute the above terraform code in oci, it make the below service like d
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
       ```
-  - ML Monitoring
-    ```
-    SELECT * FROM performance_schema.rpd_query_stats;
-    ```
+    - ML Monitoring
+      ```
+      SELECT * FROM performance_schema.rpd_query_stats;
+      ```
 
 - ONNX 구성 (python 기준)
   - install ONNX Runtime
