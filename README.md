@@ -332,7 +332,7 @@ If you execute the above terraform code in oci, it make the below service like d
       
       -- explain for whole test table
       CALL sys.ML_EXPLAIN_TABLE('census.census_test', @census_model, 'census.census_test_explanations', JSON_OBJECT('prediction_explainer', 'permutation_importance'));
-      
+
       -- unload model
       CALL sys.ML_MODEL_UNLOAD(@census_model);
       ```
@@ -378,3 +378,7 @@ If you execute the above terraform code in oci, it make the below service like d
     // 5. load the model into HeatWave using the above session variable.
     mysql> CALL sys.ML_MODEL_IMPORT(@onnx_encode, NULL, 'iris_onnx');
     ```
+- ML Monitoring
+  ```
+  SELECT * FROM performance_schema.rpd_query_stats;
+  ```
