@@ -2,7 +2,8 @@
 
 Provision MySQL Heatwave with Terraform (MDS, HeatWave Node).
 
-[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/khkwon01/terraform-mds/archive/refs/tags/mds-heatwave-v3.4.0.zip)
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/khkwon01/terraform-mds/archive/refs/tags/mds-heatwave-v3.4.0.zip)     
+(다운로드 URL : https://github.com/khkwon01/terraform-mds/archive/refs/tags/mds-heatwave-v3.4.0.zip)
 
 
 # Demo Cloud Architecture diagram
