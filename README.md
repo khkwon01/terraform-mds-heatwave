@@ -178,7 +178,7 @@ If you execute the above terraform code in oci, it make the below service like d
     LIMIT 10;
     ```
 # HeatWave Lakehouse
-  - Lakehouse Demo
+  - Lakehouse Demo (>= HeatWave.512GB shape)
     - Run MySQL autopilot in object store using mysqlshell
       ```
       SET @db_list = '["test"]'
