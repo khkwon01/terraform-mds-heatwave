@@ -70,7 +70,7 @@ variable "mysql_lakehouse_enabled" {
 
 variable "mysql_heatwave_cluster_size" {
   description = "Number of MySQL HeatWave nodes to be created"
-  default     = 1
+  default     = 3
 }
 
 variable "mysql_heatwave_shape" {
