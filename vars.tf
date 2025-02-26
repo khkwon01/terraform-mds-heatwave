@@ -37,7 +37,7 @@ variable "mysql_db_system_admin_password" {
 }
 
 variable "mysql_shape_name" {
-  default = "MySQL.HeatWave.VM.Standard"
+  default = "MySQL.4"
 }
 
 variable "mysql_data_storage_in_gb" {
@@ -51,21 +51,21 @@ variable "deploy_mds_ha" {
 }
 
 variable "mysql_db_version" {
-  default = "8.0.35"
+  default = "9.2.1"
 }
 
 variable "mysql_db_configuration" {
-  default = "MySQL.HeatWave.VM.Standard.Standalone_New1"  
+  default = "MySQL.4.Standalone_cust1"  
 }
 
 variable "mysql_heatwave_enabled" {
   description = "Defines whether a MySQL HeatWave cluster is enabled"
-  default     = false
+  default     = true
 }
 
 variable "mysql_lakehouse_enabled" {
   description = "Defines whether a MySQL Lakehouse is enabled or not"
-  default     = false
+  default     = true
 }
 
 variable "mysql_heatwave_cluster_size" {
@@ -75,5 +75,5 @@ variable "mysql_heatwave_cluster_size" {
 
 variable "mysql_heatwave_shape" {
   description = "The shape to be used instead of mysql_shape_name when mysql_heatwave_enabled = true."
-  default     = "MySQL.HeatWave.VM.Standard"
+  default     = "HeatWave.512GB"
 }
