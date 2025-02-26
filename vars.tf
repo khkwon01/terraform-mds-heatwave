@@ -17,7 +17,7 @@ variable operator_ssh_public_key { default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAA
 variable operator_ssh_private_key_path { default = "./keys/id_rsa"}
 variable operator_os { default = "Oracle Linux" }
 variable operator_os_version { default = "8" }
-variable operator_name { default = "MDS-Client" }
+variable operator_name { default = "HEATWAVE-Client" }
 
 # MySQL Data Service
 variable "mds_instance_name" {
