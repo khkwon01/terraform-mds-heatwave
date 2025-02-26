@@ -22,7 +22,7 @@ variable operator_name { default = "HEATWAVE-Client" }
 # MySQL Data Service
 variable "mds_instance_name" {
   description = "Name of the MDS instance"
-  default     = "HEATWAVE-Client"
+  default     = "HEATWAVE-DB"
 }
 
 variable "mysql_db_system_admin_username" {
